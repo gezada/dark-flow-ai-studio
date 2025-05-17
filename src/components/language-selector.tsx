@@ -48,7 +48,7 @@ export function LanguageSelector({ minimal = false }: LanguageSelectorProps) {
           {minimal ? (
             <span className="text-xs font-medium">{language.toUpperCase()}</span>
           ) : (
-            currentLanguage?.label || "English"
+            <span>{currentLanguage?.label || "English"}</span>
           )}
           {!minimal && <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />}
         </Button>

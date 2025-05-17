@@ -1,3 +1,4 @@
+
 import { useLanguage } from "@/components/language-provider";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,23 +7,24 @@ import { Textarea } from "@/components/ui/textarea";
 import { Upload as UploadIcon, Calendar, Check, Image } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 const UploadPage = () => {
-  const {
-    t
-  } = useLanguage();
-  return <div className="space-y-6">
+  const { t } = useLanguage();
+  
+  return (
+    <div className="space-y-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <h1 className="text-3xl font-bold">{t("upload")}</h1>
         <Button variant="default" className="bg-accent hover:bg-accent-hover">
           <Calendar className="mr-2 h-4 w-4" />
-          Schedule
+          {t("schedule")}
         </Button>
       </div>
 
       <Tabs defaultValue="upload">
         <TabsList>
-          <TabsTrigger value="upload">Upload</TabsTrigger>
-          <TabsTrigger value="scheduled">Scheduled</TabsTrigger>
+          <TabsTrigger value="upload">{t("upload")}</TabsTrigger>
+          <TabsTrigger value="scheduled">{t("schedule")}</TabsTrigger>
         </TabsList>
         <TabsContent value="upload">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
@@ -100,19 +102,19 @@ const UploadPage = () => {
           </div>
         </TabsContent>
       </Tabs>
-    </div>;
+    </div>
+  );
 };
+
 interface ChannelOptionProps {
   name: string;
   subscribers: string;
   selected: boolean;
 }
-function ChannelOption({
-  name,
-  subscribers,
-  selected
-}: ChannelOptionProps) {
-  return <div className={`flex items-center justify-between p-3 rounded-md ${selected ? 'bg-secondary' : 'hover:bg-secondary/50'}`}>
+
+function ChannelOption({ name, subscribers, selected }: ChannelOptionProps) {
+  return (
+    <div className={`flex items-center justify-between p-3 rounded-md ${selected ? 'bg-secondary' : 'hover:bg-secondary/50'}`}>
       <div className="flex items-center">
         <div className="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center mr-3">
           {name[0]}
@@ -125,6 +127,8 @@ function ChannelOption({
       <div className={`w-5 h-5 rounded-full flex items-center justify-center ${selected ? 'bg-accent text-white' : 'border'}`}>
         {selected && <Check className="h-3 w-3" />}
       </div>
-    </div>;
+    </div>
+  );
 }
+
 export default UploadPage;
