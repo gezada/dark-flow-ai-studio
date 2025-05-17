@@ -17,6 +17,7 @@ import AnalyticsPage from "./pages/Analytics";
 import CommentsPage from "./pages/Comments";
 import SchedulerPage from "./pages/Scheduler";
 import SettingsPage from "./pages/Settings";
+import { CommandPalette } from "./components/command-palette";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Layout>
+          <CommandPalette />
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/channels" element={<ChannelsPage />} />
