@@ -34,7 +34,7 @@ const UploadPage = () => {
                 <div className="space-y-6">
                   <div className="border-2 border-dashed rounded-md p-6 flex flex-col items-center justify-center text-center">
                     <UploadIcon className="h-10 w-10 text-muted-foreground mb-4" />
-                    <h3 className="font-medium mb-1">Drop your video file here</h3>
+                    <h3 className="font-medium mb-1">Drop your video(s) file here</h3>
                     <p className="text-sm text-muted-foreground mb-4">
                       Supports MP4, MOV up to 10GB
                     </p>
