@@ -1,4 +1,3 @@
-
 import { cn } from "@/lib/utils";
 import { useLanguage } from "./language-provider";
 import { ThemeToggle } from "./theme-toggle";
@@ -6,12 +5,10 @@ import { LanguageSelector } from "./language-selector";
 import { Button } from "@/components/ui/button";
 import { BarChart, Calendar, ChevronRight, Home, Image, Inbox, LayoutDashboard, LogOut, Plus, Settings, Upload, Users } from "lucide-react";
 import { Link } from "react-router-dom";
-
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
   collapsed?: boolean;
   setCollapsed?: (collapsed: boolean) => void;
 }
-
 export function Sidebar({
   className,
   collapsed = false,
@@ -21,11 +18,9 @@ export function Sidebar({
   const {
     t
   } = useLanguage();
-  
-  return (
-    <div className={cn("flex flex-col h-screen bg-card border-r transition-all duration-300", collapsed ? "w-16" : "w-64", className)} {...props}>
+  return <div className={cn("flex flex-col h-screen bg-card border-r transition-all duration-300", collapsed ? "w-16" : "w-64", className)} {...props}>
       <div className="flex items-center justify-between h-14 px-4 border-b">
-        <h2 className={cn("font-bold text-xl whitespace-nowrap", collapsed && "hidden")}>🔨 Dark Hammer</h2>
+        <h2 className={cn("font-bold text-xl whitespace-nowrap", collapsed && "hidden")}>Dark Hammer</h2>
         <Button variant="ghost" size="icon" onClick={() => setCollapsed?.(!collapsed)} className={cn("ml-auto", !collapsed && "rotate-180")}>
           <ChevronRight />
         </Button>
@@ -55,11 +50,7 @@ export function Sidebar({
       </div>
 
       <div className={cn("p-4 border-t", collapsed && "flex flex-col items-center gap-2")}>
-        {collapsed ? (
-          <LanguageSelector minimal />
-        ) : (
-          <LanguageSelector />
-        )}
+        {collapsed ? <LanguageSelector minimal /> : <LanguageSelector />}
         <div className="flex items-center justify-between mt-3">
           <ThemeToggle />
           <Button variant="ghost" size="icon" className="text-muted-foreground">
@@ -68,29 +59,24 @@ export function Sidebar({
           </Button>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 }
-
 interface NavItemProps {
   href: string;
   icon: React.ReactNode;
   label: string;
   collapsed?: boolean;
 }
-
 function NavItem({
   href,
   icon,
   label,
   collapsed
 }: NavItemProps) {
-  return (
-    <Link to={href} className={cn("flex items-center gap-3 px-3 py-2 rounded-md hover:bg-accent hover:text-accent-foreground", "transition-colors")}>
+  return <Link to={href} className={cn("flex items-center gap-3 px-3 py-2 rounded-md hover:bg-accent hover:text-accent-foreground", "transition-colors")}>
       <span className="flex items-center justify-center w-6 h-6">
         {icon}
       </span>
       {!collapsed && <span>{label}</span>}
-    </Link>
-  );
+    </Link>;
 }
