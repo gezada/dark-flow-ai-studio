@@ -17,6 +17,7 @@ import AnalyticsPage from "./pages/Analytics";
 import CommentsPage from "./pages/Comments";
 import SchedulerPage from "./pages/Scheduler";
 import SettingsPage from "./pages/Settings";
+import LandingPage from "./pages/Landing";
 
 const queryClient = new QueryClient();
 
@@ -26,8 +27,9 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Layout>
-          <Routes>
+        <Routes>
+          <Route path="/landing" element={<LandingPage />} />
+          <Route element={<Layout />}>
             <Route path="/" element={<Dashboard />} />
             <Route path="/channels" element={<ChannelsPage />} />
             <Route path="/ideas" element={<IdeasPage />} />
@@ -40,8 +42,8 @@ const App = () => (
             <Route path="/scheduler" element={<SchedulerPage />} />
             <Route path="/settings" element={<SettingsPage />} />
             <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Layout>
+          </Route>
+        </Routes>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

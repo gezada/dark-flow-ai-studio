@@ -28,17 +28,24 @@ export function ThemeProvider({
   storageKey = "vite-ui-theme",
   ...props
 }: ThemeProviderProps) {
-  const [theme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme>(
+    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
+  )
 
   useEffect(() => {
-    const root = window.document.documentElement;
-    root.classList.remove("light");
-    root.classList.add("dark");
-  }, []);
+    const root = window.document.documentElement
+
+    root.classList.remove("light")
+    root.classList.add("dark")
+    localStorage.setItem(storageKey, "dark")
+  }, [storageKey])
 
   const value = {
     theme,
-    setTheme: () => {}, // No-op since we only support dark mode
+    setTheme: (theme: Theme) => {
+      localStorage.setItem(storageKey, theme)
+      setTheme(theme)
+    },
   }
 
   return (

@@ -1,15 +1,12 @@
 
 import { useState } from "react";
+import { Outlet } from "react-router-dom";
 import { Sidebar } from "./sidebar";
 import { ThemeProvider } from "./theme-provider";
 import { CommandPalette } from "./command-palette";
 import { UserMenu } from "./user-menu";
 
-interface LayoutProps {
-  children: React.ReactNode;
-}
-
-export function Layout({ children }: LayoutProps) {
+export function Layout() {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
@@ -21,7 +18,7 @@ export function Layout({ children }: LayoutProps) {
             <UserMenu />
           </div>
           <CommandPalette />
-          {children}
+          <Outlet />
         </main>
       </div>
     </ThemeProvider>

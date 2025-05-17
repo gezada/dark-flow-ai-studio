@@ -2,7 +2,7 @@
 import { useLanguage } from "@/components/language-provider";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { dashboardStats, channels, comments, ideas } from "@/lib/mock-data";
-import { BarChart, ListFilter, MessagesSquare, TrendingUp, Users } from "lucide-react";
+import { BarChart, CheckCircle, ChevronRight, ListFilter, MessagesSquare, TrendingUp, Users } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,6 +14,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const { t } = useLanguage();
@@ -68,39 +69,82 @@ const Dashboard = () => {
           <CardTitle>Content Workflow</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5">
-            <WorkflowCard 
-              title={t("generateIdeas")} 
-              description="AI-powered content ideas" 
-              buttonText="Generate" 
-              badge={`${ideas.length} ideas`}
-              href="/ideas"
-            />
-            <WorkflowCard 
-              title={t("createHeadlines")} 
-              description="Catchy titles with AI" 
-              buttonText="Create"
-              href="/headlines" 
-            />
-            <WorkflowCard 
-              title={t("designThumbnail")} 
-              description="Eye-catching thumbnails" 
-              buttonText="Design"
-              href="/thumbnails" 
-            />
-            <WorkflowCard 
-              title={t("writeScript")} 
-              description="Full video scripts" 
-              buttonText="Write"
-              href="/scripts" 
-            />
-            <WorkflowCard 
-              title={t("schedule")} 
-              description="Optimize publish times" 
-              buttonText="Schedule" 
-              badge="7 pending"
-              href="/scheduler"
-            />
+          <div className="flex flex-col md:flex-row gap-0 md:gap-4">
+            {/* Timeline steps for workflow */}
+            <div className="flex flex-col md:flex-row justify-between w-full mb-6 md:mb-10">
+              <WorkflowTimelineItem 
+                number={1}
+                title="Ideas"
+                description="AI content ideas"
+                active={true}
+                href="/ideas"
+                badge={`${ideas.length} ideas`}
+              />
+              <WorkflowConnector />
+              <WorkflowTimelineItem 
+                number={2}
+                title="Headlines"
+                description="Catchy titles"
+                href="/headlines"
+              />
+              <WorkflowConnector />
+              <WorkflowTimelineItem 
+                number={3}
+                title="Thumbnails"
+                description="Eye-catching images"
+                href="/thumbnails"
+              />
+              <WorkflowConnector />
+              <WorkflowTimelineItem 
+                number={4}
+                title="Scripts"
+                description="Full video scripts"
+                href="/scripts"
+              />
+              <WorkflowConnector />
+              <WorkflowTimelineItem 
+                number={5}
+                title="Upload"
+                description="Schedule content"
+                href="/upload"
+              />
+            </div>
+
+            {/* Cards below timeline */}
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mt-6">
+              <WorkflowCard 
+                title={t("generateIdeas")} 
+                description="AI-powered content ideas" 
+                buttonText="Generate" 
+                badge={`${ideas.length} ideas`}
+                href="/ideas"
+              />
+              <WorkflowCard 
+                title={t("createHeadlines")} 
+                description="Catchy titles with AI" 
+                buttonText="Create"
+                href="/headlines" 
+              />
+              <WorkflowCard 
+                title={t("designThumbnail")} 
+                description="Eye-catching thumbnails" 
+                buttonText="Design"
+                href="/thumbnails" 
+              />
+              <WorkflowCard 
+                title={t("writeScript")} 
+                description="Full video scripts" 
+                buttonText="Write"
+                href="/scripts" 
+              />
+              <WorkflowCard 
+                title={t("upload")} 
+                description="Optimize publish times" 
+                buttonText="Upload" 
+                badge="Ready"
+                href="/upload"
+              />
+            </div>
           </div>
         </CardContent>
       </Card>
@@ -239,10 +283,51 @@ function WorkflowCard({ title, description, buttonText, badge, href }: WorkflowC
       <CardContent>
         <p className="text-xs text-muted-foreground mb-4">{description}</p>
         <Button variant="default" size="sm" className="w-full bg-accent hover:bg-accent-hover" asChild>
-          <a href={href}>{buttonText}</a>
+          <Link to={href}>{buttonText}</Link>
         </Button>
       </CardContent>
     </Card>
+  );
+}
+
+interface WorkflowTimelineItemProps {
+  number: number;
+  title: string;
+  description: string;
+  active?: boolean;
+  completed?: boolean;
+  href: string;
+  badge?: string;
+}
+
+function WorkflowTimelineItem({ number, title, description, active = false, completed = false, href, badge }: WorkflowTimelineItemProps) {
+  return (
+    <div className="relative flex-1 text-center md:text-left mb-6 md:mb-0">
+      <Link to={href} className="flex flex-col md:block items-center group">
+        <div className={`
+          w-12 h-12 rounded-full flex items-center justify-center text-lg font-semibold mb-2
+          ${active ? 'bg-red-600 text-white' : 'bg-secondary text-foreground'}
+          ${completed ? 'bg-green-600 text-white' : ''}
+          mx-auto md:mx-0
+          group-hover:scale-105 transition-transform
+        `}>
+          {completed ? <CheckCircle className="w-6 h-6" /> : number}
+        </div>
+        <div>
+          <div className="font-medium group-hover:text-red-600 transition-colors">{title}</div>
+          <div className="text-xs text-muted-foreground">{description}</div>
+          {badge && <Badge variant="secondary" className="mt-1">{badge}</Badge>}
+        </div>
+      </Link>
+    </div>
+  );
+}
+
+function WorkflowConnector() {
+  return (
+    <div className="hidden md:flex items-center justify-center flex-1 max-w-[80px]">
+      <ChevronRight className="text-muted-foreground" />
+    </div>
   );
 }
 
