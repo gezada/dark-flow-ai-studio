@@ -1,56 +1,27 @@
-
 import { cn } from "@/lib/utils";
 import { useLanguage } from "./language-provider";
 import { ThemeToggle } from "./theme-toggle";
 import { LanguageSelector } from "./language-selector";
 import { Button } from "@/components/ui/button";
-import {
-  BarChart,
-  Calendar,
-  Home,
-  Image,
-  Inbox,
-  LayoutDashboard,
-  LogOut,
-  Plus,
-  Settings,
-  Upload,
-  Users,
-} from "lucide-react";
+import { BarChart, Calendar, Home, Image, Inbox, LayoutDashboard, LogOut, Plus, Settings, Upload, Users } from "lucide-react";
 import { Link } from "react-router-dom";
-
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
   collapsed?: boolean;
   setCollapsed?: (collapsed: boolean) => void;
 }
-
 export function Sidebar({
   className,
   collapsed = false,
   setCollapsed,
   ...props
 }: SidebarProps) {
-  const { t } = useLanguage();
-
-  return (
-    <div
-      className={cn(
-        "flex flex-col h-screen bg-card border-r transition-all duration-300", 
-        collapsed ? "w-16" : "w-64", 
-        className
-      )}
-      {...props}
-    >
+  const {
+    t
+  } = useLanguage();
+  return <div className={cn("flex flex-col h-screen bg-card border-r transition-all duration-300", collapsed ? "w-16" : "w-64", className)} {...props}>
       <div className="flex items-center justify-between h-14 px-4 border-b">
-        <h2 className={cn("font-bold text-xl whitespace-nowrap", collapsed && "hidden")}>
-          YT Manager
-        </h2>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => setCollapsed?.(!collapsed)}
-          className={cn("ml-auto", !collapsed && "rotate-180")}
-        >
+        <h2 className={cn("font-bold text-xl whitespace-nowrap", collapsed && "hidden")}>🔨 Dark Hammer</h2>
+        <Button variant="ghost" size="icon" onClick={() => setCollapsed?.(!collapsed)} className={cn("ml-auto", !collapsed && "rotate-180")}>
           <ChevronIcon />
         </Button>
       </div>
@@ -71,10 +42,7 @@ export function Sidebar({
         </nav>
 
         <div className="px-2">
-          <Button 
-            variant="default" 
-            className={cn("w-full justify-start gap-2 bg-accent hover:bg-accent-hover", collapsed && "justify-center")}
-          >
+          <Button variant="default" className={cn("w-full justify-start gap-2 bg-accent hover:bg-accent-hover", collapsed && "justify-center")}>
             <Plus size={18} />
             {!collapsed && <span>{t("addChannel")}</span>}
           </Button>
@@ -91,47 +59,29 @@ export function Sidebar({
           </Button>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 }
-
 interface NavItemProps {
   href: string;
   icon: React.ReactNode;
   label: string;
   collapsed?: boolean;
 }
-
-function NavItem({ href, icon, label, collapsed }: NavItemProps) {
-  return (
-    <Link
-      to={href}
-      className={cn(
-        "flex items-center gap-3 px-3 py-2 rounded-md hover:bg-accent hover:text-accent-foreground",
-        "transition-colors"
-      )}
-    >
+function NavItem({
+  href,
+  icon,
+  label,
+  collapsed
+}: NavItemProps) {
+  return <Link to={href} className={cn("flex items-center gap-3 px-3 py-2 rounded-md hover:bg-accent hover:text-accent-foreground", "transition-colors")}>
       <span className="flex items-center justify-center w-6 h-6">
         {icon}
       </span>
       {!collapsed && <span>{label}</span>}
-    </Link>
-  );
+    </Link>;
 }
-
 function ChevronIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="h-4 w-4"
-    >
+  return <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
       <path d="m9 18 6-6-6-6" />
-    </svg>
-  );
+    </svg>;
 }
