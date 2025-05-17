@@ -1,4 +1,3 @@
-
 import { useLanguage } from "@/components/language-provider";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,12 +6,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { Upload as UploadIcon, Calendar, Check, Image } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
 const UploadPage = () => {
-  const { t } = useLanguage();
-
-  return (
-    <div className="space-y-6">
+  const {
+    t
+  } = useLanguage();
+  return <div className="space-y-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <h1 className="text-3xl font-bold">{t("upload")}</h1>
         <Button variant="default" className="bg-accent hover:bg-accent-hover">
@@ -68,28 +66,16 @@ const UploadPage = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
-                    <ChannelOption
-                      name="Tech Insights"
-                      subscribers="256K"
-                      selected={true}
-                    />
-                    <ChannelOption
-                      name="Game Reviews"
-                      subscribers="175K"
-                      selected={false}
-                    />
-                    <ChannelOption
-                      name="Financial Freedom"
-                      subscribers="320K"
-                      selected={false}
-                    />
+                    <ChannelOption name="Tech Insights" subscribers="256K" selected={true} />
+                    <ChannelOption name="Game Reviews" subscribers="175K" selected={false} />
+                    <ChannelOption name="Financial Freedom" subscribers="320K" selected={false} />
                   </div>
                 </CardContent>
               </Card>
               
               <Card className="bg-card">
                 <CardHeader>
-                  <CardTitle>Thumbnail</CardTitle>
+                  <CardTitle>Thumbnails</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
@@ -114,19 +100,19 @@ const UploadPage = () => {
           </div>
         </TabsContent>
       </Tabs>
-    </div>
-  );
+    </div>;
 };
-
 interface ChannelOptionProps {
   name: string;
   subscribers: string;
   selected: boolean;
 }
-
-function ChannelOption({ name, subscribers, selected }: ChannelOptionProps) {
-  return (
-    <div className={`flex items-center justify-between p-3 rounded-md ${selected ? 'bg-secondary' : 'hover:bg-secondary/50'}`}>
+function ChannelOption({
+  name,
+  subscribers,
+  selected
+}: ChannelOptionProps) {
+  return <div className={`flex items-center justify-between p-3 rounded-md ${selected ? 'bg-secondary' : 'hover:bg-secondary/50'}`}>
       <div className="flex items-center">
         <div className="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center mr-3">
           {name[0]}
@@ -139,8 +125,6 @@ function ChannelOption({ name, subscribers, selected }: ChannelOptionProps) {
       <div className={`w-5 h-5 rounded-full flex items-center justify-center ${selected ? 'bg-accent text-white' : 'border'}`}>
         {selected && <Check className="h-3 w-3" />}
       </div>
-    </div>
-  );
+    </div>;
 }
-
 export default UploadPage;
