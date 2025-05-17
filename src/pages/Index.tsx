@@ -238,7 +238,7 @@ function WorkflowCard({ title, description, buttonText, badge, href }: WorkflowC
       </CardHeader>
       <CardContent>
         <p className="text-xs text-muted-foreground mb-4">{description}</p>
-        <Button variant="accent" size="sm" className="w-full" asChild>
+        <Button variant="default" size="sm" className="w-full bg-accent hover:bg-accent-hover" asChild>
           <a href={href}>{buttonText}</a>
         </Button>
       </CardContent>
