@@ -24,13 +24,13 @@ const UploadPage = () => {
       <Tabs defaultValue="upload">
         <TabsList>
           <TabsTrigger value="upload">{t("upload")}</TabsTrigger>
-          <TabsTrigger value="scheduled">{t("schedule")}</TabsTrigger>
+          <TabsTrigger value="scheduled">{t("scheduled")}</TabsTrigger>
         </TabsList>
         <TabsContent value="upload">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
             <Card className="bg-card lg:col-span-2">
               <CardHeader>
-                <CardTitle>Video Upload</CardTitle>
+                <CardTitle>{t("videoUpload")}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-6">

@@ -45,6 +45,8 @@ const translations: Record<Language, Record<string, string>> = {
     language: "Language",
     help: "Help",
     logout: "Logout",
+    scheduled: "Scheduled",
+    videoUpload: "Video Upload",
   },
   es: {
     dashboard: "Panel",
@@ -73,6 +75,8 @@ const translations: Record<Language, Record<string, string>> = {
     language: "Idioma",
     help: "Ayuda",
     logout: "Cerrar Sesión",
+    scheduled: "Programado",
+    videoUpload: "Subir Video",
   },
   "pt-BR": {
     dashboard: "Painel",
@@ -101,6 +105,8 @@ const translations: Record<Language, Record<string, string>> = {
     language: "Idioma",
     help: "Ajuda",
     logout: "Sair",
+    scheduled: "Agendado",
+    videoUpload: "Enviar Vídeo",
   }
 }
 

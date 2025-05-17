@@ -33,6 +33,24 @@ export function LanguageSelector({ minimal = false }: LanguageSelectorProps) {
   
   const currentLanguage = languages.find(l => l.value === language);
 
+  // Render a simplified version for minimal mode
+  if (minimal) {
+    return (
+      <Button
+        variant="outline"
+        className="w-10 p-0 justify-center"
+        onClick={() => {
+          // Cycle through languages
+          const currentIndex = languages.findIndex(l => l.value === language);
+          const nextIndex = (currentIndex + 1) % languages.length;
+          setLanguage(languages[nextIndex].value as "en" | "es" | "pt-BR");
+        }}
+      >
+        <span className="text-xs font-medium">{language.toUpperCase()}</span>
+      </Button>
+    );
+  }
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -40,17 +58,10 @@ export function LanguageSelector({ minimal = false }: LanguageSelectorProps) {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className={cn(
-            "justify-between",
-            minimal ? "w-10 p-0" : "w-[180px]"
-          )}
+          className="w-[180px] justify-between"
         >
-          {minimal ? (
-            <span className="text-xs font-medium">{language.toUpperCase()}</span>
-          ) : (
-            <span>{currentLanguage?.label || "English"}</span>
-          )}
-          {!minimal && <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />}
+          <span>{currentLanguage?.label || "English"}</span>
+          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[180px] p-0">
