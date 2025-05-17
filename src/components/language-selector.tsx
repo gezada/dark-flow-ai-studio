@@ -23,7 +23,11 @@ const languages = [
   { value: "pt-BR", label: "Português (Brasil)" },
 ];
 
-export function LanguageSelector() {
+export interface LanguageSelectorProps {
+  minimal?: boolean;
+}
+
+export function LanguageSelector({ minimal = false }: LanguageSelectorProps) {
   const { language, setLanguage } = useLanguage();
   const [open, setOpen] = useState(false);
   
@@ -36,10 +40,17 @@ export function LanguageSelector() {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="justify-between w-[180px]"
+          className={cn(
+            "justify-between",
+            minimal ? "w-10 p-0" : "w-[180px]"
+          )}
         >
-          {currentLanguage?.label || "English"}
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          {minimal ? (
+            <span className="text-xs font-medium">{language.toUpperCase()}</span>
+          ) : (
+            currentLanguage?.label || "English"
+          )}
+          {!minimal && <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[180px] p-0">

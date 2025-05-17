@@ -54,8 +54,12 @@ export function Sidebar({
         </div>
       </div>
 
-      <div className={cn("p-4 border-t", collapsed && "flex flex-col items-center")}>
-        {!collapsed && <LanguageSelector />}
+      <div className={cn("p-4 border-t", collapsed && "flex flex-col items-center gap-2")}>
+        {collapsed ? (
+          <LanguageSelector minimal />
+        ) : (
+          <LanguageSelector />
+        )}
         <div className="flex items-center justify-between mt-3">
           <ThemeToggle />
           <Button variant="ghost" size="icon" className="text-muted-foreground">
