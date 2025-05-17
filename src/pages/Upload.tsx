@@ -3,22 +3,17 @@ import { useLanguage } from "@/components/language-provider";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Upload as UploadIcon, Calendar, Check, Image } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { UploadIcon } from "lucide-react";
 
-const UploadPage = () => {
+export default function UploadPage() {
   const { t } = useLanguage();
-  
+
   return (
     <div className="space-y-6">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold">{t("upload")}</h1>
-        <Button variant="default" className="bg-accent hover:bg-accent-hover">
-          <Calendar className="mr-2 h-4 w-4" />
-          {t("schedule")}
-        </Button>
       </div>
 
       <Tabs defaultValue="upload">
@@ -34,101 +29,93 @@ const UploadPage = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-6">
-                  <div className="border-2 border-dashed rounded-md p-6 flex flex-col items-center justify-center text-center">
-                    <UploadIcon className="h-10 w-10 text-muted-foreground mb-4" />
-                    <h3 className="font-medium mb-1">Drop your video(s) file here</h3>
-                    <p className="text-sm text-muted-foreground mb-4">
-                      Supports MP4, MOV up to 10GB
-                    </p>
-                    <Button variant="outline">Select Video</Button>
+                  <div className="border-2 border-dashed border-border rounded-lg p-12 text-center">
+                    <UploadIcon className="mx-auto h-12 w-12 text-muted-foreground" />
+                    <div className="mt-4">
+                      <h3 className="text-lg font-semibold">Drag and drop your video</h3>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        or click to browse your files
+                      </p>
+                    </div>
+                    <Button variant="default" className="mt-4">
+                      Select File
+                    </Button>
                   </div>
 
                   <div className="space-y-4">
-                    <div className="space-y-2">
+                    <div className="grid gap-2">
                       <Label htmlFor="title">Title</Label>
                       <Input id="title" placeholder="Enter video title" />
                     </div>
-                    <div className="space-y-2">
+                    <div className="grid gap-2">
                       <Label htmlFor="description">Description</Label>
-                      <Textarea id="description" placeholder="Enter video description" rows={5} />
+                      <Input id="description" placeholder="Enter video description" />
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="tags">Tags (comma separated)</Label>
-                      <Input id="tags" placeholder="tech, smartphones, review" />
+                    <div className="grid gap-2">
+                      <Label htmlFor="tags">Tags</Label>
+                      <Input id="tags" placeholder="Enter tags separated by commas" />
                     </div>
+                    <Button className="w-full">
+                      Upload Video
+                    </Button>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <div className="space-y-6">
-              <Card className="bg-card">
-                <CardHeader>
-                  <CardTitle>Channel Selection</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    <ChannelOption name="Tech Insights" subscribers="256K" selected={true} />
-                    <ChannelOption name="Game Reviews" subscribers="175K" selected={false} />
-                    <ChannelOption name="Financial Freedom" subscribers="320K" selected={false} />
+            <Card className="bg-card">
+              <CardHeader>
+                <CardTitle>Upload Settings</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="grid gap-2">
+                    <Label htmlFor="privacy">Privacy</Label>
+                    <select id="privacy" className="w-full p-2 rounded-md border border-border bg-background">
+                      <option>Public</option>
+                      <option>Unlisted</option>
+                      <option>Private</option>
+                    </select>
                   </div>
-                </CardContent>
-              </Card>
-              
-              <Card className="bg-card">
-                <CardHeader>
-                  <CardTitle>Thumbnails</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div className="border-2 border-dashed rounded-md p-4 flex flex-col items-center justify-center">
-                      <Image className="h-8 w-8 text-muted-foreground mb-2" />
-                      <p className="text-sm text-muted-foreground text-center">
-                        Drop thumbnail or click to browse
-                      </p>
-                    </div>
-                    <Button variant="outline" size="sm" className="w-full">
-                      Select from Library
-                    </Button>
+                  <div className="grid gap-2">
+                    <Label htmlFor="category">Category</Label>
+                    <select id="category" className="w-full p-2 rounded-md border border-border bg-background">
+                      <option>Education</option>
+                      <option>Entertainment</option>
+                      <option>Gaming</option>
+                      <option>Music</option>
+                      <option>Tech</option>
+                    </select>
                   </div>
-                </CardContent>
-              </Card>
-            </div>
+                  <div className="grid gap-2">
+                    <Label htmlFor="playlist">Playlist</Label>
+                    <select id="playlist" className="w-full p-2 rounded-md border border-border bg-background">
+                      <option>None</option>
+                      <option>Tutorials</option>
+                      <option>Vlogs</option>
+                    </select>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </TabsContent>
         <TabsContent value="scheduled">
-          <div className="flex items-center justify-center h-40 border-2 border-dashed rounded-md mt-6">
-            <p className="text-muted-foreground">No videos currently scheduled</p>
-          </div>
+          <Card className="bg-card mt-6">
+            <CardHeader>
+              <CardTitle>Scheduled Videos</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-center py-12">
+                <h3 className="text-lg font-semibold">No scheduled videos</h3>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Your scheduled videos will appear here
+                </p>
+              </div>
+            </CardContent>
+          </Card>
         </TabsContent>
       </Tabs>
     </div>
   );
-};
-
-interface ChannelOptionProps {
-  name: string;
-  subscribers: string;
-  selected: boolean;
 }
-
-function ChannelOption({ name, subscribers, selected }: ChannelOptionProps) {
-  return (
-    <div className={`flex items-center justify-between p-3 rounded-md ${selected ? 'bg-secondary' : 'hover:bg-secondary/50'}`}>
-      <div className="flex items-center">
-        <div className="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center mr-3">
-          {name[0]}
-        </div>
-        <div>
-          <p className="text-sm font-medium">{name}</p>
-          <p className="text-xs text-muted-foreground">{subscribers} subscribers</p>
-        </div>
-      </div>
-      <div className={`w-5 h-5 rounded-full flex items-center justify-center ${selected ? 'bg-accent text-white' : 'border'}`}>
-        {selected && <Check className="h-3 w-3" />}
-      </div>
-    </div>
-  );
-}
-
-export default UploadPage;
