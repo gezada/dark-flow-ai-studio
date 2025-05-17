@@ -203,7 +203,7 @@ export const comments: CommentData[] = [
     channelId: 'chan_3',
     author: 'MoneyMinded',
     authorAvatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=MoneyMinded',
-    content: 'Thanks for the investment tips! I've been using your strategy for 3 months and already seeing good returns.',
+    content: 'Thanks for the investment tips! I\'ve been using your strategy for 3 months and already seeing good returns.',
     likes: 312,
     publishedAt: new Date(2023, 6, 2).toISOString(),
     replied: true,
