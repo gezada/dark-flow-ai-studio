@@ -1,11 +1,11 @@
 
-import { Moon, Sun } from "lucide-react";
+import { Moon } from "lucide-react";
 import { useTheme } from "./theme-provider";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "./language-provider";
 
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
   const { t } = useLanguage();
 
   // Since we only support dark theme per theme-provider.tsx, this button is disabled
