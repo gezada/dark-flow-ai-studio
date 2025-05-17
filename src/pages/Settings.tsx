@@ -1,4 +1,3 @@
-
 import { useLanguage } from "@/components/language-provider";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -13,7 +12,7 @@ import { Badge } from "@/components/ui/badge";
 
 const SettingsPage = () => {
   const { t } = useLanguage();
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
 
   return (
     <div className="space-y-6">
@@ -106,24 +105,21 @@ const SettingsPage = () => {
                     <Label>Theme</Label>
                     <div className="flex gap-4">
                       <div 
-                        className={`flex flex-col items-center gap-2 p-4 rounded-md cursor-pointer border ${theme === 'dark' ? 'border-accent' : 'border-secondary'}`}
-                        onClick={() => setTheme('dark')}
+                        className="flex flex-col items-center gap-2 p-4 rounded-md cursor-not-allowed border border-accent opacity-75"
                       >
                         <div className="w-12 h-12 rounded-full bg-card flex items-center justify-center">
                           <Moon className="h-6 w-6" />
                         </div>
                         <span>Dark</span>
-                        {theme === 'dark' && <Check className="text-accent h-4 w-4" />}
+                        <Check className="text-accent h-4 w-4" />
                       </div>
                       <div 
-                        className={`flex flex-col items-center gap-2 p-4 rounded-md cursor-pointer border ${theme === 'light' ? 'border-accent' : 'border-secondary'}`}
-                        onClick={() => setTheme('light')}
+                        className="flex flex-col items-center gap-2 p-4 rounded-md cursor-not-allowed border border-secondary opacity-50"
                       >
                         <div className="w-12 h-12 rounded-full bg-[#F8F9FA] flex items-center justify-center text-gray-900">
                           <Sun className="h-6 w-6" />
                         </div>
-                        <span>Light</span>
-                        {theme === 'light' && <Check className="text-accent h-4 w-4" />}
+                        <span>Light (Not Available)</span>
                       </div>
                     </div>
                   </div>
