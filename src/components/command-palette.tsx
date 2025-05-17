@@ -31,7 +31,7 @@ export function CommandPalette() {
   const [open, setOpen] = React.useState(false);
   const { t } = useLanguage();
   const navigate = useNavigate();
-  const { setTheme, theme } = useTheme();
+  const { setTheme } = useTheme();
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
