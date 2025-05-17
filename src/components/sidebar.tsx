@@ -1,11 +1,25 @@
 
 import { cn } from "@/lib/utils";
-import { useLanguage } from "./language-provider";
-import { ThemeToggle } from "./theme-toggle";
-import { LanguageSelector } from "./language-selector";
 import { Button } from "@/components/ui/button";
-import { BarChart, Calendar, ChevronRight, Home, Image, Inbox, LayoutDashboard, LogOut, Plus, Settings, Upload, Users } from "lucide-react";
-import { Link } from "react-router-dom";
+import { 
+  AnalyticsIcon,
+  BarChart, 
+  Calendar, 
+  ChevronDown,
+  ChevronRight, 
+  Home, 
+  Image, 
+  Inbox, 
+  LayoutDashboard, 
+  LogOut, 
+  Plus, 
+  Settings,
+  Upload, 
+  Users 
+} from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "./ui/collapsible";
+import { useState } from "react";
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
   collapsed?: boolean;
@@ -18,7 +32,10 @@ export function Sidebar({
   setCollapsed,
   ...props
 }: SidebarProps) {
-  const { t } = useLanguage();
+  const location = useLocation();
+  const [creativeWorkflowOpen, setCreativeWorkflowOpen] = useState(true);
+
+  const isActive = (path: string) => location.pathname === path;
 
   return (
     <div 
@@ -45,17 +62,45 @@ export function Sidebar({
 
       <div className="flex-1 overflow-y-auto hide-scrollbar">
         <nav className="flex flex-col gap-1 px-2 py-4">
-          <NavItem href="/" icon={<Home />} label={t("dashboard")} collapsed={collapsed} />
-          <NavItem href="/channels" icon={<Users />} label={t("channels")} collapsed={collapsed} />
-          <NavItem href="/ideas" icon={<LayoutDashboard />} label={t("ideas")} collapsed={collapsed} />
-          <NavItem href="/headlines" icon={<LayoutDashboard />} label={t("headlines")} collapsed={collapsed} />
-          <NavItem href="/thumbnails" icon={<Image />} label={t("thumbnails")} collapsed={collapsed} />
-          <NavItem href="/scripts" icon={<LayoutDashboard />} label={t("scripts")} collapsed={collapsed} />
-          <NavItem href="/upload" icon={<Upload />} label={t("upload")} collapsed={collapsed} />
-          <NavItem href="/analytics" icon={<BarChart />} label={t("analytics")} collapsed={collapsed} />
-          <NavItem href="/comments" icon={<Inbox />} label={t("comments")} collapsed={collapsed} />
-          <NavItem href="/scheduler" icon={<Calendar />} label={t("scheduler")} collapsed={collapsed} />
-          <NavItem href="/settings" icon={<Settings />} label={t("settings")} collapsed={collapsed} />
+          <NavItem href="/" icon={<Home />} label="Dashboard" collapsed={collapsed} isActive={isActive("/")} />
+          <NavItem href="/channels" icon={<Users />} label="Channels" collapsed={collapsed} isActive={isActive("/channels")} />
+          <NavItem href="/analytics" icon={<BarChart />} label="Analytics" collapsed={collapsed} isActive={isActive("/analytics")} />
+          
+          {/* Creative Workflow Collapsible */}
+          <div className="px-3 py-2">
+            {collapsed ? (
+              <NavItem href="/ideas" icon={<LayoutDashboard />} label="Ideas" collapsed={collapsed} isActive={isActive("/ideas") || isActive("/headlines") || isActive("/thumbnails") || isActive("/scripts")} />
+            ) : (
+              <Collapsible
+                open={creativeWorkflowOpen}
+                onOpenChange={setCreativeWorkflowOpen}
+                className="w-full"
+              >
+                <CollapsibleTrigger asChild>
+                  <div className="flex items-center justify-between cursor-pointer rounded-md hover:bg-accent hover:text-accent-foreground transition-colors">
+                    <div className="flex items-center gap-3 py-1">
+                      <span className="flex items-center justify-center w-6 h-6">
+                        <LayoutDashboard />
+                      </span>
+                      <span>Creative Workflow</span>
+                    </div>
+                    <ChevronDown className={`h-4 w-4 transition-transform ${creativeWorkflowOpen ? 'rotate-180' : ''}`} />
+                  </div>
+                </CollapsibleTrigger>
+                <CollapsibleContent className="pl-9 pt-1 space-y-1">
+                  <NavItem href="/ideas" icon={null} label="Ideas" collapsed={false} isActive={isActive("/ideas")} />
+                  <NavItem href="/headlines" icon={null} label="Headlines" collapsed={false} isActive={isActive("/headlines")} />
+                  <NavItem href="/thumbnails" icon={null} label="Thumbnails" collapsed={false} isActive={isActive("/thumbnails")} />
+                  <NavItem href="/scripts" icon={null} label="Scripts" collapsed={false} isActive={isActive("/scripts")} />
+                </CollapsibleContent>
+              </Collapsible>
+            )}
+          </div>
+
+          <NavItem href="/comments" icon={<Inbox />} label="Comments" collapsed={collapsed} isActive={isActive("/comments")} />
+          <NavItem href="/upload" icon={<Upload />} label="Upload" collapsed={collapsed} isActive={isActive("/upload")} />
+          <NavItem href="/scheduler" icon={<Calendar />} label="Scheduler" collapsed={collapsed} isActive={isActive("/scheduler")} />
+          <NavItem href="/settings" icon={<Settings />} label="Settings" collapsed={collapsed} isActive={isActive("/settings")} />
         </nav>
 
         <div className="px-2">
@@ -67,7 +112,7 @@ export function Sidebar({
             )}
           >
             <Plus size={18} />
-            {!collapsed && <span>{t("addChannel")}</span>}
+            {!collapsed && <span>Add Channel</span>}
           </Button>
         </div>
       </div>
@@ -76,26 +121,10 @@ export function Sidebar({
         "p-4 border-t", 
         collapsed && "flex flex-col items-center gap-2"
       )}>
-        {collapsed ? (
-          <div className="mb-2">
-            <LanguageSelector minimal />
-          </div>
-        ) : (
-          <LanguageSelector />
-        )}
-        
-        <div className={cn(
-          "flex items-center", 
-          collapsed ? "justify-center" : "justify-between mt-3"
-        )}>
-          <ThemeToggle />
-          {!collapsed && (
-            <Button variant="ghost" size="icon" className="text-muted-foreground">
-              <LogOut size={18} />
-              <span className="sr-only">{t("logout")}</span>
-            </Button>
-          )}
-        </div>
+        <Button variant="ghost" size="icon" className="text-muted-foreground ml-auto">
+          <LogOut size={18} />
+          <span className="sr-only">Logout</span>
+        </Button>
       </div>
     </div>
   );
@@ -103,23 +132,26 @@ export function Sidebar({
 
 interface NavItemProps {
   href: string;
-  icon: React.ReactNode;
+  icon: React.ReactNode | null;
   label: string;
   collapsed?: boolean;
+  isActive?: boolean;
 }
 
-function NavItem({ href, icon, label, collapsed }: NavItemProps) {
+function NavItem({ href, icon, label, collapsed, isActive }: NavItemProps) {
   return (
     <Link 
       to={href} 
       className={cn(
-        "flex items-center gap-3 px-3 py-2 rounded-md hover:bg-accent hover:text-accent-foreground", 
-        "transition-colors"
+        "flex items-center gap-3 px-3 py-2 rounded-md hover:bg-accent hover:text-accent-foreground transition-colors", 
+        isActive && "bg-red-600 text-white hover:bg-red-700 hover:text-white"
       )}
     >
-      <span className="flex items-center justify-center w-6 h-6">
-        {icon}
-      </span>
+      {icon && (
+        <span className="flex items-center justify-center w-6 h-6">
+          {icon}
+        </span>
+      )}
       {!collapsed && <span>{label}</span>}
     </Link>
   );
