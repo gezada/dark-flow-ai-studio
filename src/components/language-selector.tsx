@@ -14,13 +14,14 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useLanguage } from "./language-provider";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useUIStore } from "@/store";
 
 const languages = [
   { value: "en", label: "English" },
   { value: "es", label: "Español" },
-  { value: "pt-BR", label: "Português (Brasil)" },
+  { value: "pt", label: "Português" },
 ];
 
 export interface LanguageSelectorProps {
@@ -28,10 +29,16 @@ export interface LanguageSelectorProps {
 }
 
 export function LanguageSelector({ minimal = false }: LanguageSelectorProps) {
-  const { language, setLanguage } = useLanguage();
+  const { i18n } = useTranslation();
+  const { locale, setLocale } = useUIStore();
   const [open, setOpen] = useState(false);
   
-  const currentLanguage = languages.find(l => l.value === language);
+  const currentLanguage = languages.find(l => l.value === locale) || languages[0];
+
+  const handleLanguageChange = (value: string) => {
+    setLocale(value);
+    i18n.changeLanguage(value);
+  };
 
   // Render a simplified version for minimal mode
   if (minimal) {
@@ -41,12 +48,12 @@ export function LanguageSelector({ minimal = false }: LanguageSelectorProps) {
         className="w-10 p-0 justify-center"
         onClick={() => {
           // Cycle through languages
-          const currentIndex = languages.findIndex(l => l.value === language);
+          const currentIndex = languages.findIndex(l => l.value === locale);
           const nextIndex = (currentIndex + 1) % languages.length;
-          setLanguage(languages[nextIndex].value as "en" | "es" | "pt-BR");
+          handleLanguageChange(languages[nextIndex].value);
         }}
       >
-        <span className="text-xs font-medium">{language.toUpperCase()}</span>
+        <span className="text-xs font-medium">{locale.toUpperCase()}</span>
       </Button>
     );
   }
@@ -60,7 +67,7 @@ export function LanguageSelector({ minimal = false }: LanguageSelectorProps) {
           aria-expanded={open}
           className="w-[180px] justify-between"
         >
-          <span>{currentLanguage?.label || "English"}</span>
+          <span>{currentLanguage.label}</span>
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -73,15 +80,12 @@ export function LanguageSelector({ minimal = false }: LanguageSelectorProps) {
               <CommandItem
                 key={lang.value}
                 value={lang.value}
-                onSelect={(currentValue) => {
-                  setLanguage(currentValue as "en" | "es" | "pt-BR");
-                  setOpen(false);
-                }}
+                onSelect={handleLanguageChange}
               >
                 <Check
                   className={cn(
                     "mr-2 h-4 w-4",
-                    language === lang.value ? "opacity-100" : "opacity-0"
+                    locale === lang.value ? "opacity-100" : "opacity-0"
                   )}
                 />
                 {lang.label}

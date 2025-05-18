@@ -18,11 +18,23 @@ import CommentsPage from "./pages/Comments";
 import SchedulerPage from "./pages/Scheduler";
 import SettingsPage from "./pages/Settings";
 import LandingPage from "./pages/Landing";
+import { useUIStore } from "./store";
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
+const AppContent = () => {
+  const { locale } = useUIStore();
+  const { i18n } = useTranslation();
+
+  useEffect(() => {
+    if (locale) {
+      i18n.changeLanguage(locale);
+    }
+  }, [locale, i18n]);
+
+  return (
     <TooltipProvider>
       <Toaster />
       <Sonner />
@@ -46,6 +58,12 @@ const App = () => (
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
+  );
+};
+
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <AppContent />
   </QueryClientProvider>
 );
 
