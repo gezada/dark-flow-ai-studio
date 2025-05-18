@@ -1,0 +1,52 @@
+{
+  "common": {
+    "dashboard": "Dashboard",
+    "channels": "Channels",
+    "ideas": "Ideas",
+    "headlines": "Headlines",
+    "thumbnails": "Thumbnails",
+    "scripts": "Scripts",
+    "upload": "Upload",
+    "analytics": "Analytics",
+    "comments": "Comments",
+    "settings": "Settings",
+    "scheduler": "Scheduler",
+    "addChannel": "Add Channel",
+    "search": "Search",
+    "filter": "Filter",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "generate": "Generate",
+    "download": "Download",
+    "preview": "Preview"
+  },
+  "kpi": {
+    "viewsToday": "Views Today",
+    "subscribers": "Subscribers",
+    "watchTime": "Watch Time",
+    "revenueEstimate": "Revenue Estimate",
+    "pendingComments": "Pending Comments",
+    "scheduledVideos": "Scheduled Videos"
+  },
+  "workflow": {
+    "ideaLab": "Idea Lab",
+    "headlineForge": "Headline Forge",
+    "thumbnailFactory": "Thumbnail Factory",
+    "scriptStudio": "Script Studio",
+    "scheduleBoard": "Schedule Board",
+    "step": "Step {{number}}",
+    "completed": "Completed",
+    "inProgress": "In Progress",
+    "pending": "Pending"
+  },
+  "tts": {
+    "narration": "Narration",
+    "voice": "Voice",
+    "speed": "Speed",
+    "generateAudio": "Generate Audio",
+    "regenerate": "Regenerate",
+    "downloadMp3": "Download MP3"
+  }
+}

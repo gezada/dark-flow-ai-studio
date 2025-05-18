@@ -1,0 +1,52 @@
+{
+  "common": {
+    "dashboard": "Panel",
+    "channels": "Canales",
+    "ideas": "Ideas",
+    "headlines": "Titulares",
+    "thumbnails": "Miniaturas",
+    "scripts": "Guiones",
+    "upload": "Subir",
+    "analytics": "Analíticas",
+    "comments": "Comentarios",
+    "settings": "Configuración",
+    "scheduler": "Programador",
+    "addChannel": "Añadir Canal",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "generate": "Generar",
+    "download": "Descargar",
+    "preview": "Vista previa"
+  },
+  "kpi": {
+    "viewsToday": "Vistas Hoy",
+    "subscribers": "Suscriptores",
+    "watchTime": "Tiempo de Visualización",
+    "revenueEstimate": "Ingresos Estimados",
+    "pendingComments": "Comentarios Pendientes",
+    "scheduledVideos": "Videos Programados"
+  },
+  "workflow": {
+    "ideaLab": "Laboratorio de Ideas",
+    "headlineForge": "Forja de Titulares",
+    "thumbnailFactory": "Fábrica de Miniaturas",
+    "scriptStudio": "Estudio de Guiones",
+    "scheduleBoard": "Tablero de Programación",
+    "step": "Paso {{number}}",
+    "completed": "Completado",
+    "inProgress": "En Progreso",
+    "pending": "Pendiente"
+  },
+  "tts": {
+    "narration": "Narración",
+    "voice": "Voz",
+    "speed": "Velocidad",
+    "generateAudio": "Generar Audio",
+    "regenerate": "Regenerar",
+    "downloadMp3": "Descargar MP3"
+  }
+}

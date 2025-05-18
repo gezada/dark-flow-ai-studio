@@ -1,0 +1,52 @@
+{
+  "common": {
+    "dashboard": "Painel",
+    "channels": "Canais",
+    "ideas": "Ideias",
+    "headlines": "Manchetes",
+    "thumbnails": "Miniaturas",
+    "scripts": "Roteiros",
+    "upload": "Enviar",
+    "analytics": "Análises",
+    "comments": "Comentários",
+    "settings": "Configurações",
+    "scheduler": "Agendador",
+    "addChannel": "Adicionar Canal",
+    "search": "Pesquisar",
+    "filter": "Filtrar",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "generate": "Gerar",
+    "download": "Baixar",
+    "preview": "Visualizar"
+  },
+  "kpi": {
+    "viewsToday": "Visualizações Hoje",
+    "subscribers": "Inscritos",
+    "watchTime": "Tempo de Visualização",
+    "revenueEstimate": "Estimativa de Receita",
+    "pendingComments": "Comentários Pendentes",
+    "scheduledVideos": "Vídeos Agendados"
+  },
+  "workflow": {
+    "ideaLab": "Laboratório de Ideias",
+    "headlineForge": "Forja de Manchetes",
+    "thumbnailFactory": "Fábrica de Miniaturas",
+    "scriptStudio": "Estúdio de Roteiros",
+    "scheduleBoard": "Quadro de Agendamento",
+    "step": "Etapa {{number}}",
+    "completed": "Concluído",
+    "inProgress": "Em Andamento",
+    "pending": "Pendente"
+  },
+  "tts": {
+    "narration": "Narração",
+    "voice": "Voz",
+    "speed": "Velocidade",
+    "generateAudio": "Gerar Áudio",
+    "regenerate": "Regenerar",
+    "downloadMp3": "Baixar MP3"
+  }
+}
